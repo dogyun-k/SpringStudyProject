@@ -3,6 +3,7 @@ package com.study.board;
 import java.util.List;
 
 import com.study.board.domain.Post;
+import com.study.board.domain.User;
 import com.study.board.service.PostService;
 
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,8 @@ public class PostServiceTest {
     public void createTest() {
 
         for (int i = 0; i < 10; i++) {
-            Post newPost = new Post("title " + i, "content " + i, "author " + i);
+            User user = new User("id", "pw");
+            Post newPost = new Post("title " + i, "content " + i, user);
             postService.create(newPost);
         }
 

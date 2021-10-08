@@ -1,6 +1,7 @@
 package com.study.board;
 
 import com.study.board.domain.Post;
+import com.study.board.domain.User;
 import com.study.board.repository.PostRepository;
 
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,8 @@ public class PostRepositoryTest {
     public void createTest() {
 
         for (int i = 0; i < 10; i++) {
-            Post newPost = new Post("title " + i, "content " + i, "author " + i);
+            User user = new User("id", "pw");
+            Post newPost = new Post("title " + i, "content " + i, user);
             postRepository.create(newPost);
         }
 
@@ -27,7 +29,8 @@ public class PostRepositoryTest {
     @Test
     public void readByIdTest() {
         for (int i = 0; i < 10; i++) {
-            Post newPost = new Post("title " + i, "content " + i, "author " + i);
+            User user = new User("id", "pw");
+            Post newPost = new Post("title " + i, "content " + i, user);
             postRepository.create(newPost);
         }
         System.out.println(postRepository.read(1L));

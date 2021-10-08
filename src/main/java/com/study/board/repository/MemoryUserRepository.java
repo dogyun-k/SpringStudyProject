@@ -26,4 +26,9 @@ public class MemoryUserRepository implements UserRepository {
     public List<User> findAll() {
         return new ArrayList<>(userDb.values());
     }
+
+    @Override
+    public User findBySeq(Long seq) {
+        return userDb.get(seq);
+    }
 }

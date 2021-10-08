@@ -5,7 +5,6 @@ import java.util.List;
 import com.study.board.domain.Post;
 import com.study.board.repository.PostRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;

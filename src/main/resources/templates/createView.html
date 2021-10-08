@@ -7,16 +7,17 @@
 </head>
 
 <body th:align="center">
-
+    <h1>글 작성</h1>
+    <a href="/">취소</a>
     <form action="/post/create" method="POST">
         제목<br>
         <input type="text" name="title"><br>
         내용<br>
         <textarea name="content"></textarea><br>
         작성자<br>
-        <select name="author" th:each="user : ${userList}">
+        <select name="userSeq">
             <option>작성자</option>
-            <option th:value="${user.id}"></option>
+            <option th:each="user : ${userList}" th:text="${user.id}" th:value="${user.seq}"></option>
         </select>
         <input type="submit" value="작성">
     </form>

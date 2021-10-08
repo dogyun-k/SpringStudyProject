@@ -8,4 +8,5 @@ public interface UserRepository {
     
     Long save(User user);
     List<User> findAll();
+    User findBySeq(Long seq);
 }

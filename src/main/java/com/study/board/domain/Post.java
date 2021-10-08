@@ -11,12 +11,12 @@ public class Post {
 
     private String content;
 
-    private String author;
+    private User user;
 
-    public Post(String title, String content, String author) {
+    public Post(String title, String content, User user) {
         this.title = title;
         this.content = content;
-        this.author = author;
+        this.user = user;
     }
 
 }

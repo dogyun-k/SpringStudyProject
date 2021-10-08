@@ -23,4 +23,8 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public User findBySeq(Long seq){
+        return userRepository.findBySeq(seq);
+    }
+
 }
