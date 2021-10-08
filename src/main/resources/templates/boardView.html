@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org" lang="ko">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>게시판</title>
+</head>
+
+<body th:align="center">
+
+    <h1>게시판</h1>
+    <a href="/">메인</a>
+    <table th:align="center">
+        <th>제목</th>
+        <th>작성자</th>
+        <tr th:each="post : ${postList}">
+            <td th:text="${post.author}"></td>
+            <td th:text="${post.title}"></td>
+        </tr>
+
+    </table>
+
+</body>
+
+</html>
