@@ -40,4 +40,9 @@ public class MemoryPostRepository implements PostRepository {
         return seq;
     }
 
+    @Override
+    public void delete(Long seq) {
+        postDb.remove(seq);
+    }
+
 }

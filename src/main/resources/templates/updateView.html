@@ -9,14 +9,15 @@
 <body th:align="center">
     <h1>게시글 수정</h1>
     
-    <form th:action="@{/post/update}" th:method="POST">
+    <form th:action="@{/posts/repost}" th:method="POST">
         <input name="seq" th:value="${post.seq}" type="hidden"></p>
         제목 : <input name="title" th:value="${post.title}"><br>
-        내용 : <input name="content" th:value="${post.content}"><br>
-        <input name="user" th:value="${post.user}" type="hidden">
+        내용 : <textarea name="content" th:text="${post.content}"></textarea><br>
+        <input name="userSeq" th:value="${post.user.seq}" type="hidden">
         <input type="submit" value="수정">
     </form>
-    <a th:href="@{/post(seq=${post.seq})}">취소</a>
+    
+    <a th:href="@{/posts/postinfo(seq=${post.seq})}">취소</a>
 
 </body>
 

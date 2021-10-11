@@ -17,4 +17,7 @@ public interface PostRepository {
 
     // seq post를 newPost로 바꿔준다.(수정)
     Long update(Long seq, Post newPost);
+
+    // post seq로 삭제하기
+    void delete(Long seq);
 }

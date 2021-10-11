@@ -31,4 +31,8 @@ public class PostService {
         return postRepository.update(seq, newPost);
     }
 
+    public void delete(Long seq) {
+        postRepository.delete(seq);
+    }
+
 }

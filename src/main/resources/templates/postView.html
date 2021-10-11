@@ -13,9 +13,11 @@
     글번호 : <span th:text="${post.seq}"></span><br><br>
     제목 : <span th:text="${post.title}"></span><br><br>
     내용 : <span th:text="${post.content}"></span><br><br>
-    작성자 : <span th:text="${post.user.id}"></span>
+    작성자 : <span th:text="${post.user.id}"></span><br>
 
-    <a th:href="@{/post/update(seq=${post.seq})}">수정</a>
+    <a th:href="@{/posts/repost(seq=${post.seq})}">수정</a>
+    <a th:href="@{/posts/depost(seq=${post.seq})}">삭제</a>
+    <a th:href="@{/posts}">뒤로</a>
 
 </body>
 
