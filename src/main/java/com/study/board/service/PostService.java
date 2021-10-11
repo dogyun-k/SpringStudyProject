@@ -27,4 +27,8 @@ public class PostService {
         return postRepository.read(seq);
     }
 
+    public Long update(Long seq, Post newPost) {
+        return postRepository.update(seq, newPost);
+    }
+
 }

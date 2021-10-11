@@ -6,8 +6,17 @@
     <title>게시글</title>
 </head>
 
-<body>
-    ㅁㄴㅇ리ㅏㅓㅁ
+<body th:align="center">
+
+    <h1>게시글</h1>
+    
+    글번호 : <span th:text="${post.seq}"></span><br><br>
+    제목 : <span th:text="${post.title}"></span><br><br>
+    내용 : <span th:text="${post.content}"></span><br><br>
+    작성자 : <span th:text="${post.user.id}"></span>
+
+    <a th:href="@{/post/update(seq=${post.seq})}">수정</a>
+
 </body>
 
 </html>

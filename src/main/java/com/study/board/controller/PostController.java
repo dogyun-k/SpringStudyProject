@@ -10,7 +10,6 @@ import com.study.board.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,8 +26,8 @@ public class PostController {
 
     @GetMapping(value = "/create")
     public String createView(Model model) {
-
         model.addAttribute("userList", userService.findAll());
+
         return "createView";
     }
 
@@ -45,12 +44,23 @@ public class PostController {
     public String readPostList(Model model) {
         List<Post> postList = postService.readAll();
         model.addAttribute("postList", postList);
+
         return "boardView";
     }
 
-    @GetMapping(value = "{seq}")
-    public String postView(@PathVariable Long seq, Model model) {
+    // 요청 파라미터가 들어와야함.
+    // 안 들어오면 예외발생
+    @GetMapping
+    public String postView(@RequestParam Long seq, Model model) {
+        model.addAttribute("post", postService.read(seq));
 
         return "postView";
+    }
+
+    @GetMapping(value = "/update{seq}")
+    public String updateView(@RequestParam Long seq, Model model) {
+        model.addAttribute("post", postService.read(seq));
+        
+        return "postUpdateView";
     }
 }

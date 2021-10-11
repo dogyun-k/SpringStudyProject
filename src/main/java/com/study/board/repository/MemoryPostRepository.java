@@ -32,4 +32,12 @@ public class MemoryPostRepository implements PostRepository {
         return postDb.get(seq);
     }
 
+    @Override
+    public Long update(Long seq, Post post) {
+        // 중복된 key(seq)가 있으면 알아서 value를 바꿔준다.
+        post.setSeq(seq);
+        postDb.put(seq, post);
+        return seq;
+    }
+
 }

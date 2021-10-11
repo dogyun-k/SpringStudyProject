@@ -14,4 +14,7 @@ public interface PostRepository {
 
     // seq로 post 1개 읽기
     Post read(Long seq);
+
+    // seq post를 newPost로 바꿔준다.(수정)
+    Long update(Long seq, Post newPost);
 }

@@ -1,18 +1,19 @@
 package com.study.board;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.List;
+
 import com.study.board.domain.Post;
 import com.study.board.domain.User;
+import com.study.board.repository.MemoryPostRepository;
 import com.study.board.repository.PostRepository;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-public class PostRepositoryTest {
+public class MemoryPostRepositoryTest {
 
-    @Autowired
-    private PostRepository postRepository;
+    private PostRepository postRepository = new MemoryPostRepository();
 
     @Test
     public void createTest() {
@@ -22,8 +23,11 @@ public class PostRepositoryTest {
             Post newPost = new Post("title " + i, "content " + i, user);
             postRepository.create(newPost);
         }
+        List<Post> postList = postRepository.readAll();
 
-        System.out.println(postRepository.readAll());
+        Post firstPost = postList.get(0);
+        assertEquals(0, firstPost.getSeq());
+        assertEquals(10, postList.size());
     }
 
     @Test

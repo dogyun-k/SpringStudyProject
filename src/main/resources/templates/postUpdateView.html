@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org" lang="ko">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>글 수정</title>
+</head>
+
+<body th:align="center">
+    <h1>게시글 수정</h1>
+    
+    <form th:action="@{/post/update}" th:method="POST">
+        <input name="seq" th:value="${post.seq}" type="hidden"></p>
+        제목 : <input name="title" th:value="${post.title}"><br>
+        내용 : <input name="content" th:value="${post.content}"><br>
+        <input name="user" th:value="${post.user}" type="hidden">
+        <input type="submit" value="수정">
+    </form>
+    <a th:href="@{/post(seq=${post.seq})}">취소</a>
+
+</body>
+
+</html>
