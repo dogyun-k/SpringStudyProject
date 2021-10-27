@@ -1,22 +1,29 @@
 package com.study.board.domain;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+import javax.persistence.*;
+
+@Getter
+@Entity
 public class Post {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long seq;
 
     private String title;
 
     private String content;
 
-    private User user;
+    @ManyToOne
+    @JoinColumn(name = "user_seq")
+    private Long userSeq;
 
-    public Post(String title, String content, User user) {
+    public Post(String title, String content, Long userSeq) {
         this.title = title;
         this.content = content;
-        this.user = user;
+        this.userSeq = userSeq;
     }
 
 }

@@ -1,21 +1,19 @@
 package com.study.board.controller;
 
-import java.util.List;
-
 import com.study.board.domain.Post;
 import com.study.board.domain.User;
 import com.study.board.service.PostService;
 import com.study.board.service.UserService;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RequestMapping(value = "/posts")
@@ -39,19 +37,21 @@ public class PostController {
     @GetMapping(value = "/postinfo")
     public String postView(@RequestParam Long seq, Model model) {
         model.addAttribute("post", postService.read(seq));
+
         return "postView";
     }
 
     @GetMapping(value = "/post")
     public String createView(Model model) {
         model.addAttribute("userList", userService.findAll());
+
         return "createView";
     }
 
     @PostMapping(value = "/post")
     public String createPost(@RequestParam Long userSeq, @RequestParam String title, @RequestParam String content) {
-        User user = userService.findBySeq(userSeq);
-        Post post = new Post(title, content, user);
+        Optional<User> user = userService.findBySeq(userSeq);
+        Post post = new Post(title, content, user.get().getSeq());      // 이 부분을 Optional로 받아 오면 Null확인을 해야하는데 예외처리를 어떻게 해야 할까
         postService.create(post);
 
         return "redirect:/posts";
@@ -60,13 +60,15 @@ public class PostController {
     @GetMapping(value = "/repost")
     public String updateView(@RequestParam Long seq, Model model) {
         model.addAttribute("post", postService.read(seq));
+
         return "updateView";
     }
 
     @PostMapping(value = "/repost")
     public String updatePost(@RequestParam Long seq, @RequestParam String title, @RequestParam String content,
-            @RequestParam Long userSeq) {
-        Post newPost = new Post(title, content, userService.findBySeq(userSeq));
+                             @RequestParam Long userSeq) {
+        Optional<User> user = userService.findBySeq(userSeq);
+        Post newPost = new Post(title, content, user.get().getSeq());
         postService.update(seq, newPost);
 
         return "redirect:/posts";
@@ -75,6 +77,7 @@ public class PostController {
     @GetMapping(value = "/depost")
     public String deletePost(@RequestParam Long seq) {
         postService.delete(seq);
+
         return "redirect:/posts";
     }
 }
