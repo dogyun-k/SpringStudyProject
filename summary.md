@@ -47,10 +47,10 @@
 - 데이터베이스 연결과 JPA 언어?방언?(확실한 용어인지 잘 모르겠음) 설정을 위해 `application.yml` 파일에서 설정을 해 줬다.
 - javax.persistance.Entity 라이브러리가 없다고 뜸. 인텔리제이로 넘어오고 제대로 설정을 덜 한 것 같음. -> 리로드 하니까 됨.
 - `MemoryUserRepository`, `MemoryPostRepository` 삭제
+- Domain을 Entity로 설정함. Entity : 비즈니스 요구사항을 모델링한 객체
 -------------
 - 엄청난 변동사항이 생긴 듯 함.
 - JpaRepository를 사용하면서 PK값으로 데이터를 읽어오는 findById 메소드의 리턴타입이 `Optional<T>`이라서 많은 변동사항이 생김.
-
 
 ### 의문점
 
