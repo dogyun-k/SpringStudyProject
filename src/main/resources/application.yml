@@ -16,7 +16,7 @@ spring:
   # JPA 하이버네이트 속성
   jpa:
     hibernate:
-      ddl-auto: create    # 서버 재 실행 시 DB를 초기화 / update : 초기화하지 않음.
+      ddl-auto: update    # 서버 재 실행 시 DB를 초기화 / update : 초기화하지 않음.
 
     generate-ddl: false
     show-sql: true        # 실행되는 쿼리문을 보여줌

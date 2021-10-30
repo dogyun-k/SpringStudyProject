@@ -27,7 +27,7 @@ public class PostController {
 
     // URL 수정함. 동사를 없애고 REST의 장점을 최대한 살리기 위함.
     @GetMapping
-    public String readPostList(Model model) { 
+    public String readPostList(Model model) {
         List<Post> postList = postService.readAll();
         model.addAttribute("postList", postList);
 
@@ -36,10 +36,10 @@ public class PostController {
 
     // 요청 파라미터가 들어와야함.
     // 안 들어오면 예외발생
-    @GetMapping(value = "/postinfo")
+    @GetMapping(value = "/postinfo")    // 단일 글 읽어오기
     public String postView(@RequestParam Long seq, Model model) {
-        model.addAttribute("post", postService.read(seq));
-
+        Optional<Post> post = postService.findById(seq);
+        model.addAttribute("post", post.get());
         return "postView";
     }
 
@@ -53,15 +53,16 @@ public class PostController {
     @PostMapping(value = "/post")
     public String createPost(@RequestParam Long userSeq, @RequestParam String title, @RequestParam String content) {
         Optional<User> user = userService.findBySeq(userSeq);
-        Post post = new Post(title, content, user.get().getSeq());      // 이 부분을 Optional로 받아 오면 Null확인을 해야하는데 예외처리를 어떻게 해야 할까
+        Post post = new Post(title, content, user.get());      // 이 부분을 Optional로 받아 오면 Null확인을 해야하는데 예외처리를 어떻게 해야 할까
         postService.create(post);
 
         return "redirect:/posts";
     }
 
     @GetMapping(value = "/repost")
-    public String updateView(@RequestParam Long seq, Model model) {
-        model.addAttribute("post", postService.read(seq));
+    public String updateView(@RequestParam Long postSeq, Model model) {
+        Optional<Post> post = postService.findById(postSeq);
+        model.addAttribute("post", post.get());
 
         return "updateView";
     }
@@ -70,8 +71,8 @@ public class PostController {
     public String updatePost(@RequestParam Long seq, @RequestParam String title, @RequestParam String content,
                              @RequestParam Long userSeq) {
         Optional<User> user = userService.findBySeq(userSeq);
-        Post newPost = new Post(title, content, user.get().getSeq());
-        postService.update(seq, newPost);
+        Post modifiedPost = new Post(title, content, user.get());
+        postService.update(seq, modifiedPost);
 
         return "redirect:/posts";
     }
@@ -79,8 +80,8 @@ public class PostController {
     // DeleteMapping 하려면 ajax를 써야하는가.
     // 이거를 못 해서 URI가 통일되지 못 함..
     @GetMapping(value = "/depost")
-    public String deletePost(@RequestParam Long seq) {
-        postService.delete(seq);
+    public String deletePost(@RequestParam Long postSeq) {
+        postService.delete(postSeq);
 
         return "redirect:/posts";
     }

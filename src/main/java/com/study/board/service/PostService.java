@@ -26,17 +26,20 @@ public class PostService {
     // JpaRepository를 사용하니까 갑자기 리턴타입에 Optional이 붙었음.
     // Optional는 객체를 포장하는 래퍼 클래스임
     // 객체에 Null값이 담겨오면 NullPointerException을 처리해줌.
-    public Optional<Post> read(Long seq) {
+    public Optional<Post> findById(Long seq) {
         return postRepository.findById(seq);
-//        return postRepository.read(seq);
     }
 
     public void update(Long seq, Post newPost) {
         // 수정은 JPA에서 따로 제공하지 않고 저장 메소드를 호출하면 적절한 UPDATE 쿼리가 전달된다.
         // newPost의 seq를 읽어서 스스로 찾아서 수정하나?
         // PK값을 스스로 읽어서?
-        postRepository.save(newPost);
-//        return postRepository.update(seq, newPost);
+        Optional<Post> post = postRepository.findById(seq);
+        Post modifiedPost = post.get();
+        modifiedPost.setTitle(newPost.getTitle());
+        modifiedPost.setContent(newPost.getContent());
+
+        postRepository.save(modifiedPost);
     }
 
     public void delete(Long seq) {

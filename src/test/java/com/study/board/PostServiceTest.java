@@ -21,7 +21,7 @@ public class PostServiceTest {
 
         for (int i = 0; i < 10; i++) {
             User user = new User("id", "pw");
-            Post newPost = new Post("title " + i, "content " + i, user.getSeq());
+            Post newPost = new Post("title " + i, "content " + i, user);
             postService.create(newPost);
         }
 

@@ -1,16 +1,14 @@
 package com.study.board.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
+@Setter
 @Getter
-@Entity
+@Entity(name = "Post")
 public class Post {
 
     @Id
@@ -20,15 +18,18 @@ public class Post {
     private String title;
 
     private String content;
-    
-    @ManyToOne
-    @JoinColumn(name = "user_seq")
-    private Long userSeq;
 
-    public Post(String title, String content, Long userSeq) {
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_seq")
+    private User user;
+
+    protected Post() {
+    }
+
+    public Post(String title, String content, User user) {
         this.title = title;
         this.content = content;
-        this.userSeq = userSeq;
+        this.user = user;
     }
 
 }
