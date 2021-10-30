@@ -1,30 +1,29 @@
 package com.study.board.service;
 
-import java.util.List;
-
 import com.study.board.domain.User;
 import com.study.board.repository.UserRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
+@RequiredArgsConstructor
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    public Long save(User user) {
+    public void save(User user) {
         userRepository.save(user);
-        return user.getSeq();
     }
 
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
-    public User findBySeq(Long seq){
-        return userRepository.findBySeq(seq);
+    public Optional<User> findBySeq(Long seq) {
+        return userRepository.findById(seq);
     }
 
 }

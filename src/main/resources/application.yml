@@ -1,0 +1,26 @@
+
+spring:
+
+  # Color console
+  output:
+    ansi:
+      enabled: always
+
+  # JPA 표준 속성 : Database
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: dogyun
+    password: 1234
+    url: jdbc:mysql://localhost:3306/ssp?serverTimezone=UTC&characterEncoding=UTF-8
+
+  # JPA 하이버네이트 속성
+  jpa:
+    hibernate:
+      ddl-auto: create    # 서버 재 실행 시 DB를 초기화 / update : 초기화하지 않음.
+
+    generate-ddl: false
+    show-sql: true        # 실행되는 쿼리문을 보여줌
+    database-platform: org.hibernate.dialect.MySQL8Dialect      # 데이터베이스 방언을 설정하는 가장 중요한 부분.
+    properties:
+      hibernate:
+        format_sql: true

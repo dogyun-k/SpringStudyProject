@@ -1,30 +1,34 @@
 package com.study.board.domain;
 
-import lombok.Data;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-@Data
+import lombok.Getter;
+
+@Getter
+@Entity
 public class Post {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long seq;
 
     private String title;
 
     private String content;
-
-    // 중복데이터 발생할 수 있음.
-    // Post만 봐도 유저 정보를 다 알 수 있게 됨.
-    // userSeq를 받게 하자.
-    // private User user;
-
+    
+    @ManyToOne
+    @JoinColumn(name = "user_seq")
     private Long userSeq;
 
-    private String userId;
-
-    public Post(String title, String content, Long userSeq, String userId) {
+    public Post(String title, String content, Long userSeq) {
         this.title = title;
         this.content = content;
         this.userSeq = userSeq;
-        this.userId = userId;
     }
 
 }
