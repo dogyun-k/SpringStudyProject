@@ -20,7 +20,7 @@ public class MemoryPostRepositoryTest {
 
         for (int i = 0; i < 10; i++) {
             User user = new User("id", "pw");
-            Post newPost = new Post("title " + i, "content " + i, user);
+            Post newPost = new Post("title " + i, "content " + i, user.getSeq());
             postRepository.create(newPost);
         }
         List<Post> postList = postRepository.readAll();
@@ -34,7 +34,7 @@ public class MemoryPostRepositoryTest {
     public void readByIdTest() {
         for (int i = 0; i < 10; i++) {
             User user = new User("id", "pw");
-            Post newPost = new Post("title " + i, "content " + i, user);
+            Post newPost = new Post("title " + i, "content " + i, user.getSeq());
             postRepository.create(newPost);
         }
         System.out.println(postRepository.read(1L));

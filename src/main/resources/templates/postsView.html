@@ -19,7 +19,7 @@
         <tr th:each="post : ${postList}">
             <td th:text="${post.seq}"></td>
             <td><a th:href="@{/posts/postinfo(seq=${post.seq})}" th:text="${post.title}"></a></td>
-            <td th:text="${post.user.id}"></td>
+            <td th:text="${post.userId}"></td>
         </tr>
     </table>
 

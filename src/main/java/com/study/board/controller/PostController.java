@@ -10,7 +10,6 @@ import com.study.board.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,8 +36,11 @@ public class PostController {
     // 요청 파라미터가 들어와야함.
     // 안 들어오면 예외발생
     @GetMapping(value = "/postinfo")
-    public String postView(@RequestParam Long seq, Model model) {
-        model.addAttribute("post", postService.read(seq));
+    public String postView(@RequestParam Long postSeq, Model model) {
+        Post post = postService.read(postSeq);
+        User user = userService.findBySeq(post.getUserSeq());
+        model.addAttribute("user", user);
+        model.addAttribute("post", post);
         return "postView";
     }
 
@@ -50,8 +52,7 @@ public class PostController {
 
     @PostMapping(value = "/post")
     public String createPost(@RequestParam Long userSeq, @RequestParam String title, @RequestParam String content) {
-        User user = userService.findBySeq(userSeq);
-        Post post = new Post(title, content, user);
+        Post post = new Post(title, content, userSeq, userService.findBySeq(userSeq));
         postService.create(post);
 
         return "redirect:/posts";
@@ -66,12 +67,17 @@ public class PostController {
     @PostMapping(value = "/repost")
     public String updatePost(@RequestParam Long seq, @RequestParam String title, @RequestParam String content,
             @RequestParam Long userSeq) {
-        Post newPost = new Post(title, content, userService.findBySeq(userSeq));
+        // RequestParam이 많아지면 어떻게 처리?
+        // 객체로 받아올 수 없는 가
+
+        Post newPost = new Post(title, content, userSeq);
         postService.update(seq, newPost);
 
         return "redirect:/posts";
     }
 
+    // DeleteMapping 하려면 ajax를 써야하는가.
+    // 이거를 못 해서 URI가 통일되지 못 함..
     @GetMapping(value = "/depost")
     public String deletePost(@RequestParam Long seq) {
         postService.delete(seq);
