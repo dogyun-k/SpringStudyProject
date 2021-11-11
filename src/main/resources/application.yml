@@ -15,8 +15,11 @@ spring:
 
   # JPA 하이버네이트 속성
   jpa:
+
+    # 스키마 자동 생성 기능 : 애플리케이션 실행 시점에 데이터베이스 테이블을 자동으로 생성함.
     hibernate:
-      ddl-auto: update    # 서버 재 실행 시 DB를 초기화 / update : 초기화하지 않음.
+      ddl-auto: create    # 서버 재 실행 시 DB를 초기화 / create-drop/update/validate/none
+      use-new-id-generator-mappings: true   # 키 생성 전략을 사용한다.
 
     generate-ddl: false
     show-sql: true        # 실행되는 쿼리문을 보여줌
@@ -24,3 +27,11 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+  thymeleaf:
+    cache: false
+    prefix: file:src/main/resources/templates/
+
+  devtools:
+    restart:
+      enabled: true

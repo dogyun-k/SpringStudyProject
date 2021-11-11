@@ -1,9 +1,8 @@
 package com.study.board.repository;
 
-import java.util.List;
-
 import com.study.board.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
@@ -11,4 +10,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 //    Long save(User user);
 //    List<User> findAll();
 //    User findBySeq(Long seq);
+
+
+    User findByEmail(String email);
 }

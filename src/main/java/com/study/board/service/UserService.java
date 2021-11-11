@@ -22,8 +22,21 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User> findBySeq(Long seq) {
-        return userRepository.findById(seq);
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    public boolean loginCheck(String email, String password) {
+        User user = userRepository.findByEmail(email);
+
+        if (user != null) {
+            return user.getPassword().equals(password);
+        }
+        return false;
+    }
+
+    public User findByEmail(String email){
+        return userRepository.findByEmail(email);
     }
 
 }

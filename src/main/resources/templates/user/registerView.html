@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org" lang="ko">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+</head>
+
+<body th:align="center">
+
+<h1>회원가입</h1>
+<form method="POST" th:action="@{/user/new}">
+    Name : <input th:type="text" th:name="name"><br>
+    E-mail : <input th:type="text" th:name="email"><br>
+    PW : <input th:type="password" th:name="password"><br>
+    <input th:type="submit" th:value="회원가입">
+</form>
+<a href="/">메인</a>
+
+</body>
+
+</html>

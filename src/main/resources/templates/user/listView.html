@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns="http://www.thymeleaf.org" lang="ko">
 
@@ -12,10 +13,12 @@
     <a href="/">메인</a>
     <table th:align="center">
         <th>번호</th>
-        <th>아이디</th>
+        <th>이름</th>
+        <th>이메일</th>
         <tr th:each="user : ${userList}">
-            <td th:text="${user.seq}"></td>
             <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.email}"></td>
         </tr>
     </table>
     
