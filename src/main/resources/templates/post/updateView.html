@@ -13,7 +13,7 @@
         <input name="seq" th:value="${post.seq}" type="hidden"></p>
         제목 : <input name="title" th:value="${post.title}"><br>
         내용 : <textarea name="content" th:text="${post.content}"></textarea><br>
-        <input name="userSeq" th:value="${post.user.seq}" type="hidden">
+        <input name="userSeq" th:value="${post.user.id}" type="hidden">
         <input type="submit" value="수정">
     </form>
     

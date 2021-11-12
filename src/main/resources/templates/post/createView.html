@@ -7,6 +7,7 @@
 </head>
 
 <body th:align="center">
+
     <h1>글 작성</h1>
     <a href="/">취소</a>
     <form action="/posts/post" method="POST">
@@ -17,7 +18,7 @@
         작성자<br>
         <select name="userSeq">
             <option>작성자</option>
-            <option th:each="user : ${userList}" th:text="${user.id}" th:value="${user.seq}"></option>
+            <option th:each="user : ${userList}" th:text="${user.email}" th:value="${user.id}"></option>
         </select>
         <input type="submit" value="작성">
     </form>
