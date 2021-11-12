@@ -51,6 +51,9 @@
 -------------
 - 엄청난 변동사항이 생긴 듯 함.
 - JpaRepository를 사용하면서 PK값으로 데이터를 읽어오는 findById 메소드의 리턴타입이 `Optional<T>`이라서 많은 변동사항이 생김.
+- Optional은 get() 메소드로 객체를 받아와야함. 사실 isPresent()로 Null 검사를 해주어야 하는데 아직까지 안 함. 조만간 하겠음.
+- Post Entity를 User Entity에 Join했음. ManyToOne
+- 
 
 ### 의문점
 
@@ -62,5 +65,5 @@
     
     그래서 Controller에서 처리를 한다면? 존재 유무를 예외 페이지 하나 만들어서 처리하나? 모르겠다~
 
-
-- JpaRepository에서 findById를 하면 Null값의 리턴 가능성때문에 Optional을 사용하는 것 같은데..
+- JpaRepository에서 findById를 하면 Null값의 리턴 가능성때문에 Optional을 사용하는 것 같은데
+    - Optional은 get() 메소드로 객체를 받아와야함. 사실 isPresent()로 Null 검사를 해주어야 하는데 아직까지 안 함. 조만간 하겠음.
