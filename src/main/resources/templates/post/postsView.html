@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.thymeleaf.org" lang="ko">
+<html lang="en" xmlns:th="https://thymeleaf.org">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -8,20 +8,32 @@
 
 <body th:align="center">
 
-    <h1>게시판</h1>
-    <a th:href="@{/posts/post}">글쓰기</a>
-    <a th:href="@{/}">메인</a>
+<h1>게시판</h1>
 
-    <table th:align="center">
-        <th>번호</th>
-        <th>제목</th>
-        <th>작성자</th>
-        <tr th:each="post : ${postList}">
-            <td th:text="${post.seq}"></td>
-            <td><a th:href="@{/posts/postinfo(seq=${post.seq})}" th:text="${post.title}"></a></td>
-            <td th:text="${post.user.email}"></td>
-        </tr>
-    </table>
+<a th:if="${session['user'].id} != null"
+   th:href="@{/user/logout}" th:text="로그아웃"></a>
+<a th:href="@{/posts/post}">글쓰기</a>
+<a th:href="@{/main}">메인</a>
+
+<p id="user" th:text="|${session['user'].name}님, 환영이요.|"></p>
+
+<table th:align="center">
+    <th>번호</th>
+    <th>제목</th>
+    <th>작성자</th>
+    <tr th:each="post : ${posts}">
+        <td th:text="${post.id}"></td>
+        <td><a th:href="@{/posts/postinfo(id=${post.id})}" th:text="${post.title}"></a></td>
+        <td th:text="${post.user.email}"></td>
+    </tr>
+</table>
+
+<!--<script>-->
+<!--    let loginState = document.getElementById("user");-->
+<!--    if (loginState == null) {-->
+<!--            loginState.setAttribute("로그인하세요");-->
+<!--    }-->
+<!--</script>-->
 
 </body>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.thymeleaf.org" lang="ko">
+<html lang="en" xmlns:th="https://thymeleaf.org">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -9,17 +9,17 @@
 <body th:align="center">
 
     <h1>글 작성</h1>
-    <a href="/">취소</a>
+    <a href="/main">취소</a>
     <form action="/posts/post" method="POST">
         제목<br>
         <input type="text" name="title"><br>
         내용<br>
         <textarea name="content"></textarea><br>
-        작성자<br>
-        <select name="userSeq">
-            <option>작성자</option>
-            <option th:each="user : ${userList}" th:text="${user.email}" th:value="${user.id}"></option>
-        </select>
+<!--        작성자<br>-->
+<!--        <select name="userId">-->
+<!--            <option>작성자</option>-->
+<!--            <option th:each="user : ${userList}" th:text="${user.email}" th:value="${user.id}"></option>-->
+<!--        </select>-->
         <input type="submit" value="작성">
     </form>
 

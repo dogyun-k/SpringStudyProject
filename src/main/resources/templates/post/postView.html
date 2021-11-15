@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.thymeleaf.org" lang="ko">
+<html lang="en" xmlns:th="https://thymeleaf.org">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -10,14 +10,16 @@
 
     <h1>게시글</h1>
     
-    글번호 : <span th:text="${post.seq}"></span><br><br>
+    글번호 : <span th:text="${post.id}"></span><br><br>
     제목 : <span th:text="${post.title}"></span><br><br>
     내용 : <span th:text="${post.content}"></span><br><br>
     작성자 : <span th:text="${post.user.email}"></span><br>
 
-    <a th:href="@{/posts/repost(postSeq=${post.seq})}">수정</a>
-    <a th:href="@{/posts/depost(postSeq=${post.seq})}">삭제</a>
+    <a th:href="@{/posts/repost(postId=${post.id})}">수정</a>
+    <a th:href="@{/posts/depost(postId=${post.id})}">삭제</a>
     <a th:href="@{/posts}">뒤로</a>
+
+    <script src="/static/js/app/index.js"></script>
 
 </body>
 

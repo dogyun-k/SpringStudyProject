@@ -18,11 +18,11 @@ spring:
 
     # 스키마 자동 생성 기능 : 애플리케이션 실행 시점에 데이터베이스 테이블을 자동으로 생성함.
     hibernate:
-      ddl-auto: create    # 서버 재 실행 시 DB를 초기화 / create-drop/update/validate/none
+      ddl-auto: update    # 서버 재 실행 시 DB를 초기화 / create-drop/update/validate/none
       use-new-id-generator-mappings: true   # 키 생성 전략을 사용한다.
 
     generate-ddl: false
-    show-sql: true        # 실행되는 쿼리문을 보여줌
+    show-sql: false        # 실행되는 쿼리문을 보여줌
     database-platform: org.hibernate.dialect.MySQL8Dialect      # 데이터베이스 방언을 설정하는 가장 중요한 부분.
     properties:
       hibernate:

@@ -1,6 +1,8 @@
 package com.study.board.domain;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -8,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Getter
+@NoArgsConstructor
 @Table(
     name = "USER",
     uniqueConstraints = {@UniqueConstraint(     // 유니크 제약조건을 만들어줌
@@ -15,7 +18,7 @@ import java.util.List;
         columnNames = {"NAME", "EMAIL"}
     )}
 )
-@Entity
+@Entity(name = "USER")
 public class User {
 
     @Id
@@ -32,6 +35,9 @@ public class User {
     private String email;
 
     private String password;
+
+    // 세션을 받고 저장함.
+    private String sessionKey = null;
 
     // Enum Type을 사용하기 위해 필요한 어노테이션. 이걸로 매핑해줘야함.
     @Enumerated(EnumType.STRING)
@@ -51,10 +57,12 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Post> post = new ArrayList<Post>();
 
-    // 기본 생성자 ( 다른 생성자가 없으면 굳이 안 해도 됨 )
-    protected User() {
-    }
+//     기본 생성자 ( 다른 생성자가 없으면 굳이 안 해도 됨 )
+    // 롬복의 NoArguConstructor로 대체 가능
+//    protected User() {
+//    }
 
+    @Builder
     public User(String name, String email, String password) {
         this.name = name;
         this.email = email;

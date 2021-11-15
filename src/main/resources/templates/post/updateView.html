@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.thymeleaf.org" lang="ko">
+<html lang="en" xmlns:th="https://thymeleaf.org">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -10,14 +10,14 @@
     <h1>게시글 수정</h1>
     
     <form th:action="@{/posts/repost}" th:method="POST">
-        <input name="seq" th:value="${post.seq}" type="hidden"></p>
+        <input name="postId" th:value="${post.id}" type="hidden"></p>
         제목 : <input name="title" th:value="${post.title}"><br>
         내용 : <textarea name="content" th:text="${post.content}"></textarea><br>
-        <input name="userSeq" th:value="${post.user.id}" type="hidden">
+        <input name="userId" th:value="${post.user.id}" type="hidden">
         <input type="submit" value="수정">
     </form>
     
-    <a th:href="@{/posts/postinfo(seq=${post.seq})}">취소</a>
+    <a th:href="@{/posts/postinfo(id=${post.id})}">취소</a>
 
 </body>
 

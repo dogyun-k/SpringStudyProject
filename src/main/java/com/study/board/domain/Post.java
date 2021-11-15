@@ -4,13 +4,16 @@ import javax.persistence.*;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
-@Setter
+
 @Getter
-@Entity(name = "Post")
+@NoArgsConstructor  // 빈 생성자 생성
+@Entity(name = "POST")
 public class Post {
 
     @Id
@@ -42,9 +45,10 @@ public class Post {
     // 근데 책에서는 항상 "다" 쪽이 주인을 한다고 하네요. 고로 여기서는 포스트가 주인이 되야 하네요.
     // 아예 ManyToOne에는 "mappedBy"옵션이 없네요.
 
-    protected Post() {
-    }
+    @OneToMany(mappedBy = "post")
+    private List<Comment> comments;
 
+    @Builder
     public Post(String title, String content, User user) {
         this.title = title;
         this.content = content;
