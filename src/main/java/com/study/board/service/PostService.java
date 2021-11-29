@@ -34,6 +34,7 @@ public class PostService {
         // 수정은 JPA에서 따로 제공하지 않고 저장 메소드를 호출하면 적절한 UPDATE 쿼리가 전달된다.
         // newPost의 id를 읽어서 스스로 찾아서 수정하나?
         // PK값을 스스로 읽어서?
+
         Post post = postRepository.findById(id).get().builder()
                 .title(newPost.getTitle())
                 .content(newPost.getContent())

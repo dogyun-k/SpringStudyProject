@@ -11,7 +11,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(PostException.class)      // PostException 예외 클래스에 대한 처리
     public String handleCustomException(PostException exception, Model model) {
         model.addAttribute("exception", exception);
-        return "/errors/postError";
+        return "errors/postError";
     }
 
     @ExceptionHandler(Exception.class)          // Exception 클래스에 대한 처리
