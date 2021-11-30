@@ -37,7 +37,6 @@ public class User {
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
 
-    // TODO 유저가입일 설정하기
     // 날짜 타입은 Temporal 어노테이션으로 매핑해줘야 함.
     // Temporal 뜻 : 형) 시간의
     @Temporal(TemporalType.DATE)

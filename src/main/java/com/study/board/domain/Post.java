@@ -23,7 +23,6 @@ public class Post {
     @Lob
     private String content;
 
-    // TODO 생성일, 수정일 설정하기
     @Temporal(TemporalType.DATE)
     private final Date createDate = new Date();
 

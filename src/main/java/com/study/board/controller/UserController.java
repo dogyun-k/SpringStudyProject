@@ -39,7 +39,8 @@ public class UserController {
 
     @PostMapping(value = "/login")
     public String loginCheck(HttpSession httpSession, @RequestParam String email, @RequestParam String password) {
-        // 세션은 request에 담겨서 온다.
+        // 세션은 requset에 담겨서 온다.
+        // TODO session 처리
 
         if (userService.loginCheck(email, password)) {
             User user = userService.findByEmail(email);
