@@ -63,6 +63,5 @@ class UserRepositoryTest {
         List<User> userList = userRepository.findAll();
 
         assertThat(userList.size()).isEqualTo(10);
-
     }
 }

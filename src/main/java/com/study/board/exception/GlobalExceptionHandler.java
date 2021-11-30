@@ -19,5 +19,4 @@ public class GlobalExceptionHandler {
         model.addAttribute("exception", exception);
         return "errors/globalError";
     }
-
 }

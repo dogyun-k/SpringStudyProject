@@ -3,6 +3,7 @@ package com.study.board.controller;
 import com.mysql.cj.Session;
 import com.study.board.domain.Post;
 import com.study.board.domain.User;
+import com.study.board.exception.post.PostNotFoundException;
 import com.study.board.service.PostService;
 import com.study.board.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -49,7 +50,11 @@ public class PostController {
         }
 
         Optional<Post> post = postService.findById(id);
-        post.ifPresent(value -> model.addAttribute("post", value));
+        if(post.isEmpty()){
+            throw new PostNotFoundException("해당 게시글을 찾을 수 없습니다.");
+        }
+
+        model.addAttribute("post", post.get());
         return "post/postView";
     }
 
