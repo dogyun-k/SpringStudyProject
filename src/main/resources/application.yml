@@ -8,10 +8,14 @@ spring:
 
   # JPA 표준 속성 : Database
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: dogyun
-    password: 1234
-    url: jdbc:mysql://localhost:3306/ssp?serverTimezone=UTC&characterEncoding=UTF-8
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    url: jdbc:h2:~/test
+  #    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: dogyun
+#    password: 1234
+#    url: jdbc:mysql://localhost:3306/ssp?serverTimezone=UTC&characterEncoding=UTF-8
 
   # JPA 하이버네이트 속성
   jpa:
@@ -22,8 +26,8 @@ spring:
       use-new-id-generator-mappings: true   # 키 생성 전략을 사용한다.
 
     generate-ddl: false
-    show-sql: true        # 실행되는 쿼리문을 보여줌
-    database-platform: org.hibernate.dialect.MySQL8Dialect      # 데이터베이스 방언을 설정하는 가장 중요한 부분.
+    show-sql: false        # 실행되는 쿼리문을 보여줌
+#    database-platform: org.hibernate.dialect.MySQL8Dialect      # 데이터베이스 방언을 설정하는 가장 중요한 부분.
     properties:
       hibernate:
         format_sql: true
