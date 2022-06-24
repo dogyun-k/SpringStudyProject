@@ -2,22 +2,24 @@ package com.study.board.controller;
 
 import com.study.board.domain.User;
 import com.study.board.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpSession;
 
+@SessionAttributes("user")
+@RequiredArgsConstructor
 @RequestMapping(value = "/user")
 @Controller
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping(value = "/new")
     public String registerView() {
@@ -26,10 +28,14 @@ public class UserController {
 
     @PostMapping(value = "/new")
     public String register(@RequestParam String name, @RequestParam String email, @RequestParam String password) {
-        User newUser = new User(name, email, password);
+        User newUser = User.builder()
+                .name(name)
+                .email(email)
+                .password(passwordEncoder.encode(password))
+                .build();
         userService.save(newUser);
 
-        return "redirect:/";
+        return "redirect:/main";
     }
 
     @GetMapping(value = "/login")
@@ -39,23 +45,27 @@ public class UserController {
 
     @PostMapping(value = "/login")
     public String loginCheck(HttpSession httpSession, @RequestParam String email, @RequestParam String password) {
-        // 세션은 requset에 담겨서 온다.
-        // TODO session 처리
+        // 세션은 request에 담겨서 온다.
 
         if (userService.loginCheck(email, password)) {
             User user = userService.findByEmail(email);
 
             // 로그인 성공 시 세션값을 세팅함.
-            httpSession.setAttribute("USER", user);
+            // SessionAttributes의 속성 이름과 같은 모델이 추가되면 이를 세션에 저장함.
+            model.addAttribute("user", user);
             return "redirect:/posts";
         }
 
         return "redirect:/user/login";
     }
 
-    @PostMapping(value = "/logout")
-    public String logout() {
-        return "redirect:/";
+    @GetMapping(value = "/logout")
+    public String logout(SessionStatus sessionStatus) {
+        // HttpSession session
+        // session.invalidate();
+
+        sessionStatus.setComplete();
+        return "redirect:/main";
     }
 
     @GetMapping(value = "/list")
