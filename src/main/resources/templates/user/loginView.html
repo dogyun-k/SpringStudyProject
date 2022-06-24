@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="https://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
@@ -11,9 +11,9 @@
     <form th:action="@{/user/login}" method="POST">
         E-mail: <input th:type="text" th:name="email"><br>
         Password: <input th:type="password" th:name="password"><br>
-        <input th:type="submit">
+        <input th:type="submit" th:value="로그인">
     </form>
-    <a href="/">메인</a>
+    <a href="/main">메인</a>
 
 </body>
 </html>
