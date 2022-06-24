@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@RequiredArgsConstructor
+@RequiredArgsConstructor    // final로 정의된 객체를 생성해서 주입함.
 @Service
 public class PostService {
 
@@ -34,12 +34,13 @@ public class PostService {
         // 수정은 JPA에서 따로 제공하지 않고 저장 메소드를 호출하면 적절한 UPDATE 쿼리가 전달된다.
         // newPost의 id를 읽어서 스스로 찾아서 수정하나?
         // PK값을 스스로 읽어서?
-        Optional<Post> post = postRepository.findById(id);
-        Post modifiedPost = post.get();
-        modifiedPost.setTitle(newPost.getTitle());
-        modifiedPost.setContent(newPost.getContent());
 
-        postRepository.save(modifiedPost);
+        Post post = postRepository.findById(id).get().builder()
+                .title(newPost.getTitle())
+                .content(newPost.getContent())
+                .build();
+
+        postRepository.save(post);
     }
 
     public void delete(Long id) {
